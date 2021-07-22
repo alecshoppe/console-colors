@@ -67,7 +67,6 @@ function App() {
   }
 
   function generateResult(data: RawDraftContentState) {
-    console.log(data)
     let result = ``;
     data.blocks.forEach(block => {
       result += styleBlock(block)
