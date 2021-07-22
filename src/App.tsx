@@ -48,28 +48,47 @@ function App() {
   }
 
   function applyStyles(text: string, style: string, position: number) {
-    return [text.slice(0, position), style, text.slice(position), additionalMaps.REMOVE_STYLE.key].join('')
+    return [text.slice(0, position), style, text.slice(position)].join('')
   }
 
   function styleBlock(block: RawDraftContentBlock) {
     const inlineStyleRanges = block.inlineStyleRanges;
     let returning = block.text;
-    let jumpchars = 0
     if(inlineStyleRanges.length === 0) return returning;
-    inlineStyleRanges.forEach(style => {
-      if(additionalMaps.hasOwnProperty(style.style)) {
-        const apply = (applyStyles(returning, additionalMaps[style.style].key, style.offset+jumpchars))
-        jumpchars += additionalMaps[style.style].key.length;
+
+    const grouped = inlineStyleRanges.reduce(function(rv:any, x:any) {
+      (rv[x['offset']] = rv[x['offset']] || []).push(x);
+      return rv;
+    }, {});
+
+    const arr = Object.entries(grouped)
+    const sorted = arr.sort().reverse(); //[0]: offset [1]: {offset, length, style}
+
+    sorted.forEach(style => {
+      // @ts-ignore
+      const styleObj: any = style[1][0]
+      if(additionalMaps.hasOwnProperty(styleObj.style)) {
+        // @ts-ignore
+        const apstyles = style[1].map(s => s.style)
+        let keys = ''
+        apstyles.forEach((st:any) => (
+          //@ts-ignore
+          keys += additionalMaps[st].key
+        ))
+        const count = keys.length;
+        const applyremover = applyStyles(returning, additionalMaps.REMOVE_STYLE.key, (styleObj.offset+styleObj.length))
+        const apply = applyStyles(applyremover, keys, styleObj.offset)
         returning = apply
       }
     })
+
     return returning
   }
 
   function generateResult(data: RawDraftContentState) {
     let result = ``;
-    data.blocks.forEach(block => {
-      result += styleBlock(block)
+    data.blocks.forEach((block, i) => {
+      result += styleBlock(block)+((i+1) !== data.blocks.length ? '\n' : '')
     })
 
     return result
