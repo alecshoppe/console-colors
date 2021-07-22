@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, Modifier, convertFromHTML, ContentState, RawDraftContentState, RawDraftContentBlock } from 'draft-js';
+import { EditorState, convertToRaw, Modifier, ContentState, RawDraftContentState, RawDraftContentBlock } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import htmlToDraft from 'html-to-draftjs';
 import './App.css';
 import StyleButton from './components/StyleButton'
-import { stylesObject, bgArrays, additionalMaps, colorArrays } from './stylesObject'
+import { bgArrays, additionalMaps, colorArrays } from './stylesObject'
 
 function App() {
   const [terminalColor, setTerminalColor] = useState('#0c0c0c')
@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     setResultText(generateResult(convertToRaw(editorState.getCurrentContent())))
-  }, [editorState.getCurrentContent()])
+  }, [editorState])
 
 
   const textButtons = colorArrays.map(colorObj => <StyleButton colorHex={colorObj[1].color} colorCode={colorObj[0]} onClick={() => addColor(colorObj[0])} text="T" />)
@@ -55,7 +55,7 @@ function App() {
     const inlineStyleRanges = block.inlineStyleRanges;
     let returning = block.text;
     let jumpchars = 0
-    if(inlineStyleRanges.length == 0) return returning;
+    if(inlineStyleRanges.length === 0) return returning;
     inlineStyleRanges.forEach(style => {
       if(additionalMaps.hasOwnProperty(style.style)) {
         const apply = (applyStyles(returning, additionalMaps[style.style].key, style.offset+jumpchars))

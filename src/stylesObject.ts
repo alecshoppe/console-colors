@@ -110,7 +110,6 @@ const colorArrays = Object.entries(stylesObject.colors)
 const bgArrays = Object.entries(stylesObject.backgrounds)
 
 export {
-  stylesObject,
   additionalMaps,
   colorArrays,
   bgArrays
