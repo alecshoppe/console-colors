@@ -7,11 +7,11 @@
 <h1>Console Colors</h1>
 <img src="public/gif.gif" />
 <p>  
-Generate ANSI codes just that easy without any packages;  
-Customize terminal background;  
-React with Typescript;  
-Code not refactored;  
-Based on Draft.js;  
+Generate ANSI codes just that easy without any packages;<br/>
+Customize terminal background;<br/>
+React with Typescript;<br/>
+Based on Draft.js;<br/>
+Code not refactored;<br/>
   
 # Online version  
 https://console-colors.vercel.app/  
