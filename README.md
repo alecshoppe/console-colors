@@ -1,5 +1,5 @@
 <p align="center">
-<img src="public/gif.gif" style="border-radius:5px" />
+<img src="public/gif.gif" />
 <p>
 
 # Console Colors  
