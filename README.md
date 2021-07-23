@@ -1,4 +1,6 @@
-<p align="center">![Console Colors](public/gif.gif)<p>
+<p align="center">
+<img src="public/gif.gif" />
+<p>
 
 # Console Colors  
 Generate ANSI codes just that easy without any packages;  
