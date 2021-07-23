@@ -1,3 +1,5 @@
+<p align="center">![Console Colors](public/gif.gif)<p>
+
 # Console Colors  
 Generate ANSI codes just that easy without any packages;  
 Customize terminal background;  
