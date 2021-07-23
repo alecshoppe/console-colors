@@ -1,8 +1,12 @@
 <p align="center">
-<img src="public/gif.gif" />
+<img src="public/placeholder.jpg" />
 <p>
 
-# Console Colors  
+ 
+<p align="center">
+<h1>Console Colors</h1>
+<img src="public/gif.gif" />
+<p>  
 Generate ANSI codes just that easy without any packages;  
 Customize terminal background;  
 React with Typescript;  
